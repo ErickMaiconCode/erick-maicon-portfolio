@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Erick Maicon - Desenvolvedor iOS e Fullstack">
+    <title>Erick Maicon | iOS & Fullstack Dev</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/@lottiefiles/lottie-player@2.0.2/dist/lottie-player.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-content">
+        <a href="#" class="logo">&lt;Erick.<span class="highlight">Dev</span>/&gt;</a>
+        
+        <nav class="nav" id="nav-menu">
+            <ul class="nav-list">
+                <li><a href="#home" class="nav-link" onclick="closeMenu()">Home</a></li>
+                <li><a href="#sobre" class="nav-link" onclick="closeMenu()">Sobre</a></li>
+                <li><a href="#projetos" class="nav-link" onclick="closeMenu()">Projetos</a></li>
+                <li><a href="#contato" class="nav-link" onclick="closeMenu()">Contato</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-controls">
+            <button id="theme-toggle" class="icon-btn" aria-label="Alternar tema">
+                <i class="ph ph-moon"></i>
+            </button>
+
+            <button id="mobile-btn" class="icon-btn mobile-trigger" aria-label="Abrir menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <p class="greeting">Olá, eu sou Erick Maicon</p>
+                
+                <h1>Desenvolvedor <span id="typing-text"></span><span class="cursor">|</span></h1>
+                
+                <p class="subtitle">Desenvolvendo experiências mobile nativas e interfaces web com fluidez e propósito.</p>
+                <div class="actions">
+                    <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+                    <a href="#contato" class="btn btn-outline">Entrar em contato</a>
+                </div>
+            </div>
+        </section>
+
+<section id="sobre" class="section">
+    <div class="container about-wrapper">
+        <div class="about-image-container">
+            <img src="Foto De Perfil.jpg" alt="Foto de Perfil" class="profile-pic"> 
+            <div class="badge-float">
+                <i class="ph ph-student"></i> iOS Developer
+            </div>
+        </div>
+
+        <div class="about-text">
+            <h2>Sobre Mim</h2>
+            <p>Sou estudante de Programação e apaixonado pelo ecossistema Apple. Recentemente, iniciei minha jornada profissional na tribo de <strong>Mobile iOS</strong>.</p>
+            <p>Meu foco é transformar linhas de código em aplicativos fluidos e funcionais. Tenho base sólida em <strong>Java</strong> e estou me especializando cada vez mais em <strong>Swift e SwiftUI</strong>, sem deixar de lado o Front-end moderno.</p>
+            
+            <h3 class="tech-title">Minha Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-item" title="Swift">
+                    <i class="devicon-swift-plain colored"></i>
+                    <span>Swift</span>
+                </div>
+                <div class="tech-item" title="Java">
+                    <i class="devicon-java-plain colored"></i>
+                    <span>Java</span>
+                </div>
+                <div class="tech-item" title="React">
+                    <i class="devicon-react-original colored"></i>
+                    <span>React</span>
+                </div>
+                <div class="tech-item" title="HTML5">
+                    <i class="devicon-html5-plain colored"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-item" title="CSS3">
+                    <i class="devicon-css3-plain colored"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="tech-item" title="Git">
+                    <i class="devicon-git-plain colored"></i>
+                    <span>Git</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projetos" class="section bg-alt">
+    <div class="container">
+        <h2>Projetos Selecionados</h2>
+        <div class="projects-grid">
+            
+            <article class="project-card">
+                <a href="https://www.figma.com/design/DeYifoBzrYWhfI7WpRIG1X/Desafio-Mobile?m=auto&t=BuDkTZfjc3QkwheH-6" target="_blank" aria-label="Abrir protótipo de redesign mobile do Agibank">
+                    <div class="card-image">
+                        <img src="Mockup Projeto Mobile.png" alt="Preview App Mobile">
+                    </div>
+                </a>
+                <div class="card-content">
+                    <div class="card-header">
+                        <h3>App Financeiro (Redesign UX)</h3>
+                        <span class="tag">Figma</span>
+                    </div>
+                    <p class="short-desc">Análise UX do app do Agibank com identificação de problemas, dados heurísticos e propostas de novas features.</p>
+                    
+                    <div class="project-details hidden" id="details-1">
+                        <p>Stack: Figma, Miro e Canva. Inclui benchmark, fluxos revisados e soluções orientadas à experiência do usuário.</p>
+                    </div>
+                    <button class="toggle-details" data-target="details-1">
+                        Ver mais detalhes <i class="ph ph-caret-down"></i>
+                    </button>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <a href="https://www.figma.com/design/MMhSMzCVxd9ygO0NzPaIfx/Projeto-ESAMC?m=auto&t=BuDkTZfjc3QkwheH-6" target="_blank" aria-label="Abrir protótipo de redesign do site ESAMC">
+                    <div class="card-image">
+                        <img src="Projeto ESAMC.png" alt="Preview Project ESAMC">
+                    </div>
+                </a>
+                <div class="card-content">
+                    <div class="card-header">
+                        <h3>Projeto Acadêmico ESAMC</h3>
+                        <span class="tag">Figma</span>
+                    </div>
+                    <p class="short-desc">Redesign do site da ESAMC baseado em insights de usabilidade e aplicado em um protótipo de alta fidelidade no Figma.</p>
+                    
+                    <div class="project-details hidden" id="details-2">
+                        <p>Stack: Figma, heurísticas de UX/UI e análise de feedback dos usuários.</p>
+                    </div>
+                    <button class="toggle-details" data-target="details-2">
+                        Ver mais detalhes <i class="ph ph-caret-down"></i>
+                    </button>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <a href="https://www.canva.com/design/DAG1mxApYf0/zxhFw_Hftwax4CtVpCfUGg/view?utm_content=DAG1mxApYf0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc0f4808565" target="_blank" aria-label="Abrir documentação do projeto Banco Guará">
+                    <div class="card-image">
+                        <img src="Banco Guará.png" alt="Preview Banco Guará">
+                    </div>
+                </a>
+                <div class="card-content">
+                    <div class="card-header">
+                        <h3>Banco Guará</h3>
+                        <span class="tag">Java</span>
+                    </div>
+                    <p class="short-desc">Sistema monolítico de gestão de cartão de crédito, simulando operações reais de um banco digital.</p>
+                    
+                    <div class="project-details hidden" id="details-3">
+                        <p>Stack: Java, Spring Security, React, MySQL (DBeaver). Inclui autenticação, gerenciamento de clientes, limites e faturas.</p>
+                    </div>
+                    <button class="toggle-details" data-target="details-3">
+                        Ver mais detalhes <i class="ph ph-caret-down"></i>
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+        <section id="contato" class="section">
+            <div class="container contact-wrapper">
+                <h2>Vamos criar algo incrível?</h2>
+                
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="input-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" placeholder="Seu nome">
+                        <small class="error-msg"></small>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="exemplo@email.com">
+                        <small class="error-msg"></small>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" rows="4" placeholder="Descreva seu projeto..."></textarea>
+                        <small class="error-msg"></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary full-width">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Erick Maicon. Todos os direitos reservados.</p>
+            
+            <div class="visitor-counter">
+                <i class="ph ph-eye"></i>
+                <span id="visit-count">0</span>
+                <span>visitas</span> 
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="icon-btn floating-btn" aria-label="Voltar ao topo">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+<div id="success-modal" class="modal-overlay">
+    <div class="modal-content">
+        <lottie-player 
+            id="lottie-success-player"
+            src="./checkmark-success.json" 
+            background="transparent" 
+            speed="1" 
+            style="width: 150px; height: 150px;" 
+            loop="false" 
+            autoplay
+            state="ready">
+        </lottie-player>
+        <h3>Mensagem Enviada!</h3>
+        <p>Obrigado pelo contato, <span id="sender-name-display"></span>. Retornarei em breve.</p>
+        <button class="btn btn-primary" onclick="closeModal()">Fechar</button>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

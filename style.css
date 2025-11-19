@@ -1,0 +1,534 @@
+/* =========================================
+   1. IMPORTS & VARIÁVEIS CSS CUSTOMIZADAS
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+/* Variáveis CSS para tema dinâmico (light/dark) */
+:root {
+    /* Cores do tema claro */
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-footer: #e2e8f0;
+    --bg-glass: rgba(255, 255, 255, 0.7); /* Efeito glassmorphism */
+    
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    
+    /* Cores primárias e gradientes */
+    --primary: #2563eb;
+    --primary-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    --accent-gradient: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+    
+    --card-border: rgba(0, 0, 0, 0.12); /* 12% de opacidade para visibilidade */
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    
+    /* Variáveis específicas para componentes */
+    --badge-bg: rgba(0, 0, 0, 0.05);
+    --badge-text: #0f172a;  
+    
+    --nav-height: 80px;
+}
+
+/* TEMA ESCURO - Sobrescreve variáveis quando data-theme="dark" */
+[data-theme="dark"] {
+    --bg-body: #09090b;
+    --bg-card: #1e293b;
+    --bg-footer: #020617;
+    --bg-glass: rgba(9, 9, 11, 0.8);
+    
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --primary: #60a5fa;
+    
+    --card-border: rgba(255, 255, 255, 0.1);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+
+    /* Ajustes de contraste para modo escuro */
+    --badge-bg: rgba(255, 255, 255, 0.1);
+    --badge-text: #f8fafc;
+}
+
+/* =========================================
+   2. RESET CSS & ESTILOS BASE
+   ========================================= */
+/* Reset básico para normalizar estilos entre navegadores */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Configurações globais do HTML */
+html { 
+    scroll-behavior: smooth; /* Scroll suave para âncoras */
+    scroll-padding-top: var(--nav-height); /* Compensa header fixo */
+}
+
+/* Estilos base do body com transições para tema */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    transition: background 0.4s ease, color 0.4s ease; /* Suaviza mudança de tema */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Tipografia hierárquica */
+h1, h2, h3, .logo { font-family: 'Space Grotesk', sans-serif; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* Classes utilitárias reutilizáveis */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 8rem 0; }
+.section h2 { font-size: 2.5rem; margin-bottom: 3rem; letter-spacing: -1px; }
+
+/* =========================================
+   3. HEADER FIXO COM GLASSMORPHISM
+   ========================================= */
+.header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    height: var(--nav-height);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-size: 1.6rem; font-weight: 700; 
+    letter-spacing: -1px;
+}
+.logo .highlight {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Navegação Desktop */
+.nav {
+    margin-left: auto; /* Empurra Menu p/ Direita */
+    margin-right: 2rem;
+}
+
+.nav-list { display: flex; list-style: none; gap: 2.5rem; }
+
+.nav-link {
+    color: var(--text-muted); font-weight: 500;
+    position: relative; transition: 0.3s;
+}
+.nav-link:hover, .nav-link.active { color: var(--text-main); }
+
+.nav-link::after {
+    content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
+    background: var(--primary-gradient); transition: width 0.3s;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* Controles (Tema e Mobile) */
+.nav-controls {
+    display: flex; gap: 0.8rem; align-items: center;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    background: transparent; border: 1px solid var(--card-border);
+    color: var(--text-main); padding: 0.6rem; border-radius: 12px;
+    cursor: pointer; font-size: 1.2rem; transition: 0.3s; display: flex;
+}
+.icon-btn:hover { background: rgba(120, 120, 120, 0.1); border-color: var(--primary); }
+
+.mobile-trigger { display: none; }
+
+/* =========================================
+   4. SEÇÃO HERO COM GRADIENTES RADIAIS
+   ========================================= */
+.hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding-top: var(--nav-height);
+    background: radial-gradient(circle at 80% 10%, rgba(37, 99, 235, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 20% 90%, rgba(236, 72, 153, 0.08) 0%, transparent 40%);
+}
+
+.greeting {
+    font-weight: 600; color: var(--primary); text-transform: uppercase;
+    letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem;
+    letter-spacing: -2px;
+}
+
+/* Texto com gradiente (efeito typewriter) */
+#typing-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+.subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 500px; margin-bottom: 2.5rem; line-height: 1.6; }
+
+/* Botões Hero */
+.actions { display: flex; gap: 1rem; }
+
+.btn {
+    padding: 1rem 2rem; border-radius: 50px; font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-primary {
+    background: var(--primary-gradient); color: white;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.5); }
+
+.btn-outline {
+    background: transparent; border: 1px solid var(--card-border); color: var(--text-main);
+}
+.btn-outline:hover { border-color: var(--text-main); background: var(--text-main); color: var(--bg-body); }
+
+
+/* =========================================
+   5. SEÇÃO SOBRE COM CSS GRID RESPONSIVO
+   ========================================= */
+/* Layout mobile-first: uma coluna */
+.about-wrapper {
+    display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
+}
+
+/* Layout desktop: duas colunas (imagem + texto) */
+@media (min-width: 768px) {
+    .about-wrapper {
+        grid-template-columns: 300px 1fr; gap: 4rem;
+    }
+}
+
+.about-image-container {
+    position: relative; width: 100%; max-width: 300px; margin: 0 auto;
+}
+
+/* Foto de perfil com efeitos hover */
+.profile-pic {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+.profile-pic:hover { transform: scale(1.02) rotate(-2deg); }
+
+.badge-float {
+    position: absolute; bottom: -15px; right: -15px;
+    background: var(--bg-card); padding: 0.8rem 1.5rem;
+    border-radius: 50px; box-shadow: var(--shadow-soft);
+    border: 1px solid var(--card-border);
+    font-weight: 700; font-size: 0.9rem;
+    display: flex; align-items: center; gap: 0.5rem; color: var(--primary);
+}
+
+/* GRID DE TECNOLOGIAS - Ícones do Devicon */
+.tech-title {
+    font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-muted); margin: 2rem 0 1rem;
+}
+
+/* Layout flex responsivo para ícones */
+.tech-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+.tech-item {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem; transition: transform 0.3s;
+}
+.tech-item:hover { transform: translateY(-5px); }
+
+.tech-item i {
+    font-size: 3rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+.tech-item span {
+    font-size: 0.8rem; font-weight: 600; color: var(--text-main);
+}
+
+/* =========================================
+   6. SEÇÃO PROJETOS - Cards com Grid Responsivo
+   ========================================= */
+/* Grid que se adapta automaticamente ao espaço disponível */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: start; /* Impede que cards vizinhos estiquem */
+}
+
+/* Card de projeto com efeitos hover */
+.project-card {
+    background: var(--bg-card);
+    border-radius: 24px;
+    border: 1px solid var(--card-border);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito hover: elevação e destaque da borda */
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+    border-color: var(--primary);
+}
+
+/* ---------------------------------------------------- */
+/* ESTILOS PARA IMAGEM CLICÁVEL E HOVER VISUAL (Final) */
+/* ---------------------------------------------------- */
+.project-card a {
+    text-decoration: none; /* Remove underline padrão do link */
+}
+
+.card-image {
+    width: 100%; height: 200px;
+    overflow: hidden; border-bottom: 1px solid var(--card-border);
+    transition: box-shadow 0.3s ease; /* Transição para a nova sombra */
+}
+
+.card-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Feedback visual ao passar o mouse sobre o LINK (que contém a imagem) */
+.project-card a:hover .card-image { 
+    /* Adiciona a sombra suave para indicar que o elemento é clicável */
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); 
+    opacity: 0.95; 
+}
+
+/* Zoom na imagem durante hover do LINK */
+.project-card a:hover .card-image img { 
+    transform: scale(1.1); 
+}
+/* ---------------------------------------------------- */
+
+
+/* Conteúdo do Card */
+.card-content {
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+}
+
+.card-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem; margin-bottom: 0.8rem;
+}
+
+.card-header h3 {
+    font-size: 1.4rem; font-weight: 700; color: var(--text-main);
+    line-height: 1.2; flex: 1;
+}
+
+.tag {
+    flex-shrink: 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    padding: 0.4rem 0.8rem; border-radius: 20px;
+    background: rgba(37, 99, 235, 0.1); color: var(--primary);
+    height: fit-content;
+}
+
+.short-desc {
+    font-size: 1rem; color: var(--text-muted); line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Botão accordion - estilo minimalista */
+.toggle-details {
+    background: transparent !important; border: none !important; padding: 0;
+    color: var(--primary); font-weight: 600; font-size: 0.95rem; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Outfit', sans-serif; margin-top: 0;
+}
+.toggle-details:hover { text-decoration: underline; opacity: 0.8; }
+
+/* Área expansível dos detalhes (accordion) */
+.project-details {
+    margin-top: 1rem; padding-top: 1rem; margin-bottom: 1rem;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-muted); font-size: 0.95rem;
+    animation: fadeIn 0.4s ease;
+}
+
+
+/* =========================================
+   7. FORMULÁRIO DE CONTATO
+   ========================================= */
+.input-group { margin-bottom: 1.5rem; }
+
+/* Estilos dos campos de input */
+.input-group input, .input-group textarea {
+    background: rgba(0,0,0,0.02); border: 1px solid var(--card-border);
+    padding: 1.2rem; border-radius: 16px; font-size: 1rem; width: 100%;
+    color: var(--text-main); transition: 0.3s; font-family: 'Outfit', sans-serif;
+}
+/* Estado focus com destaque visual */
+.input-group input:focus, .input-group textarea:focus {
+    background: var(--bg-body); border-color: var(--primary); outline: none;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); 
+}
+
+.full-width { width: 100%; cursor: pointer; border: none; font-size: 1rem; }
+
+.hidden { display: none; }
+.error-msg { color: #ef4444; font-size: 0.85rem; margin-top: 0.5rem; display: block; }
+
+/* Botão flutuante "voltar ao topo" */
+#back-to-top { 
+    position: fixed; bottom: 2rem; right: 2rem; 
+    background: var(--text-main); color: var(--bg-body);
+    border-radius: 50%; width: 50px; height: 50px; 
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: 0.3s; border: none; cursor: pointer;
+}
+/* Classe adicionada via JavaScript após scroll */
+#back-to-top.visible { opacity: 1; visibility: visible; }
+
+
+/* =========================================
+   8. RODAPÉ COM CONTADOR DE VISITAS
+   ========================================= */
+.footer {
+    background-color: var(--bg-footer);
+    color: var(--text-muted);
+    padding: 4rem 0 2rem;
+    margin-top: 6rem;
+    border-top: 1px solid var(--card-border);
+    transition: background-color 0.4s ease;
+}
+
+.footer-content {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center;
+}
+
+/* Badge do contador de visitas */
+.visitor-counter {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--badge-bg); 
+    color: var(--badge-text);
+    padding: 0.5rem 1rem; border-radius: 50px;
+    font-size: 0.85rem; font-weight: 500;
+    border: 1px solid rgba(128, 128, 128, 0.2); 
+    opacity: 0.9;
+}
+.visitor-counter i { color: var(--primary); }
+
+
+/* =========================================
+   9. RESPONSIVIDADE MOBILE
+   ========================================= */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3rem; }
+    .mobile-trigger { display: flex; }
+
+    /* Remove menu do fluxo quando fechado (evita espaço fantasma) */
+    .nav:not(.active) {
+        position: absolute; width: 0; height: 0;
+        overflow: hidden; visibility: hidden; opacity: 0;
+    }
+
+    /* Menu mobile aberto - slide lateral */
+    .nav.active .nav-list {
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: center; gap: 2rem;
+        position: fixed; top: 0; right: 0; width: 75%; height: 100vh;
+        background: var(--bg-body);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+        z-index: 999; padding: 2rem;
+        animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        border-left: 1px solid var(--card-border);
+    }
+
+    .nav.active .nav-link { font-size: 1.5rem; display: block; }
+
+    /* Overlay escuro atrás do menu */
+    .nav.active::before {
+        content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+        background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
+        z-index: 998; animation: fadeIn 0.4s ease forwards;
+    }
+}
+
+/* =========================================
+   10. ANIMAÇÕES CSS
+   ========================================= */
+/* Animação do menu mobile (slide da direita) */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Animação de fade com movimento sutil */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* MODAL DE SUCESSO COM ANIMAÇÃO LOTTIE */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(5px); 
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000; 
+    
+    opacity: 0; visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estado ativo do modal */
+.modal-overlay.active {
+    opacity: 1; visibility: visible;
+}
+
+/* Conteúdo do modal com efeito de escala */
+.modal-content {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    max-width: 90%;
+    width: 400px;
+    border: 1px solid var(--card-border);
+}
+
+/* Escala normal quando modal está ativo */
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 { margin-bottom: 0.5rem; color: var(--text-main); }
+.modal-content p { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+/* Centramento da Animação Lottie */
+.modal-content lottie-player {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem; 
+}
+
+/* Botão Primário do Modal (Correção de Sombra/Focus) */
+.modal-content .btn {
+    border: none !important;
+    outline: none !important; 
+    
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4); 
+    
+    background: var(--primary-gradient); 
+}
+
+.modal-content .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.5);
+}
